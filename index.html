@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalSky Airways | Flight Status & Passenger Tracking</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 22s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased relative text-xs">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-sky-950 text-white text-[11px] py-1.5 overflow-hidden border-b border-sky-800/50">
+        <div class="animate-marquee font-normal">
+            ✈️ <strong class="text-sky-400 font-medium">Flight Operations Notice:</strong> All international long-haul departures operating with 100% on-time efficiency. &nbsp;&nbsp; | &nbsp;&nbsp; 🌍 <strong class="font-medium">Route Notice:</strong> Transit connections through South Africa (JNB) for Accra (ACC) to Rochester (ROC) flights are running on schedule. &nbsp;&nbsp; | &nbsp;&nbsp; 🛂 Live satellite tracking active for en-route long-haul flights.
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Professional Company Logo -->
+            <a href="#home" class="flex items-center space-x-2.5 group">
+                <div class="bg-gradient-to-tr from-sky-700 via-sky-600 to-indigo-600 text-white font-bold h-9 w-9 rounded-xl flex items-center justify-center text-base shadow-md shadow-sky-500/20 border border-sky-400/30 transform group-hover:scale-105 transition duration-300">
+                    <svg class="w-5 h-5 transform -rotate-45" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center space-x-1">
+                        <span class="font-bold text-base text-slate-900 tracking-tight">GLOBAL<span class="text-sky-600">SKY</span></span>
+                        <span class="text-[9px] bg-sky-100 text-sky-800 font-medium px-1 py-0.2 rounded uppercase">Airways</span>
+                    </div>
+                    <span class="block text-[10px] text-slate-500 font-normal tracking-wider uppercase">International Flight Tracking</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-6 font-medium text-xs text-slate-600">
+                <a href="#home" class="hover:text-sky-600 transition">Home</a>
+                <a href="#services" class="hover:text-sky-600 transition">Services</a>
+                <a href="#about" class="hover:text-sky-600 transition">About Us</a>
+                <a href="#fleet" class="hover:text-sky-600 transition">Fleet & Gallery</a>
+                <a href="#contact" class="hover:text-sky-600 transition">Contact</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <a href="#home" class="bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium px-4 py-2 rounded-lg shadow-sm shadow-sky-600/20 transition">Passenger Portal</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-slate-700 focus:outline-none p-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h18"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-4 space-y-1.5">
+            <a href="#home" class="block py-1.5 text-slate-600 font-medium text-xs">Home</a>
+            <a href="#services" class="block py-1.5 text-slate-600 font-medium text-xs">Services</a>
+            <a href="#about" class="block py-1.5 text-slate-600 font-medium text-xs">About Us</a>
+            <a href="#fleet" class="block py-1.5 text-slate-600 font-medium text-xs">Fleet & Gallery</a>
+            <a href="#contact" class="block py-1.5 text-slate-600 font-medium text-xs">Contact</a>
+            <a href="#home" class="block text-center w-full mt-2 bg-sky-600 text-white text-xs font-medium py-2 rounded-lg shadow-sm">Passenger Portal</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[80vh] flex items-center justify-center text-white overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100" style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=1920&q=80');"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full text-center">
+            <span class="bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[10px] font-medium px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Real-Time Global Flight Information</span>
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight mb-4 max-w-3xl mx-auto leading-tight">
+                Track Flights & <span class="text-sky-400">Boarding Tickets</span> Live
+            </h1>
+            <p class="max-w-xl mx-auto text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed font-normal">
+                Enter your Ticket Number or PNR code below to verify real-time status, flight progress, gate locations, transit stops, and complete route breakdowns.
+            </p>
+
+            <!-- Dedicated Tracking Input Box -->
+            <div class="max-w-xl mx-auto bg-white/5 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-white/10 shadow-2xl">
+                <form onsubmit="handleHeroTrack(event)" class="flex flex-col sm:flex-row gap-2">
+                    <input type="text" id="hero-tracking-input" required placeholder="ENTER TRACKING OR PNR CODE" class="flex-grow px-3.5 py-2.5 rounded-lg bg-white text-slate-900 placeholder:text-slate-400 text-xs font-semibold uppercase focus:outline-none focus:ring-1 focus:ring-sky-500 shadow-inner">
+                    <button type="submit" id="track-btn" class="bg-sky-600 hover:bg-sky-500 text-white font-medium px-6 py-2.5 rounded-lg transition text-xs shadow-md flex items-center justify-center gap-1.5">
+                        <span>Track Flight</span> ✈️
+                    </button>
+                </form>
+                
+                <p id="hero-error" class="hidden text-[11px] font-normal text-red-300 text-center mt-2.5 bg-red-950/60 py-2 px-3 rounded-md border border-red-500/20"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview Section -->
+    <section id="services" class="bg-white py-16 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <span class="text-sky-600 font-semibold tracking-wide uppercase text-[10px]">Premium Aviation Experience</span>
+                <h2 class="text-2xl font-bold text-slate-900 mt-1">GlobalSky Flight Services</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition duration-300">
+                    <div class="text-2xl mb-3 bg-sky-100 w-10 h-10 rounded-lg flex items-center justify-center">🧳</div>
+                    <h3 class="text-base font-semibold mb-1.5 text-slate-900">Baggage Tracking</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed font-normal">Real-time RFID tag monitoring for your checked luggage from Kotoka check-in through South Africa transit to Rochester carousel destination.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition duration-300">
+                    <div class="text-2xl mb-3 bg-sky-100 w-10 h-10 rounded-lg flex items-center justify-center">💺</div>
+                    <h3 class="text-base font-semibold mb-1.5 text-slate-900">Seat Selection & Upgrade</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed font-normal">Modify seating preferences, select premium economy legroom, or request Business Class upgrades for your long-haul transit legs.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition duration-300">
+                    <div class="text-2xl mb-3 bg-sky-100 w-10 h-10 rounded-lg flex items-center justify-center">⏱️</div>
+                    <h3 class="text-base font-semibold mb-1.5 text-slate-900">Live Departure Alerts</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed font-normal">Receive instant status updates, gate assignments, and delay notifications directly on your mobile device during layovers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expanded "About Us" & Fleet Gallery Section -->
+    <section id="about" class="py-16 bg-slate-900 text-white relative">
+        <div id="fleet" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid lg:grid-cols-2 gap-10 items-center mb-12">
+                <div>
+                    <span class="text-sky-400 font-semibold uppercase text-[10px] tracking-wider">About GlobalSky Airways</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold mt-1 mb-4 text-white">Connecting Continents with Safety, Luxury & Precision</h2>
+                    <p class="text-slate-300 text-xs leading-relaxed mb-3 font-normal">
+                        GlobalSky Airways operates long-haul passenger flights across key global aviation corridors. Our flagship intercontinental route directly connects West Africa through South Africa’s premier transit hubs into major North American regional airports, including Greater Rochester International Airport (ROC).
+                    </p>
+                    <p class="text-slate-300 text-xs leading-relaxed mb-5 font-normal">
+                        Equipped with modern wide-body aircraft, state-of-the-art live flight tracking tools, and comprehensive passenger transit support, we ensure your journey from Accra (ACC) to Rochester (ROC) is comfortable, secure, and fully transparent.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-3 text-center border-t border-slate-800 pt-5">
+                        <div>
+                            <span class="block text-xl font-bold text-sky-400">120+</span>
+                            <span class="text-[10px] text-slate-400">Global Destinations</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-bold text-sky-400">99.4%</span>
+                            <span class="text-[10px] text-slate-400">On-Time Operations</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-bold text-sky-400">2.5M+</span>
+                            <span class="text-[10px] text-slate-400">Passengers / Year</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-3">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="Aircraft in Flight" class="rounded-xl shadow-lg border border-slate-800 object-cover h-40 w-full">
+                        <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff16be1?auto=format&fit=crop&w=800&q=80" alt="Airport Terminal" class="rounded-xl shadow-lg border border-slate-800 object-cover h-52 w-full">
+                    </div>
+                    <div class="space-y-3 pt-4">
+                        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=800&q=80" alt="Airplane Wing at Sunset" class="rounded-xl shadow-lg border border-slate-800 object-cover h-52 w-full">
+                        <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80" alt="Commercial Flight Cabin" class="rounded-xl shadow-lg border border-slate-800 object-cover h-40 w-full">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fleet Images Gallery -->
+            <div class="border-t border-slate-800 pt-10">
+                <div class="text-center mb-6">
+                    <span class="text-sky-400 font-semibold uppercase text-[10px] tracking-wider">Modern Fleet Showcase</span>
+                    <h3 class="text-xl font-bold text-white mt-1">Fly in Modern Aviation Comfort</h3>
+                </div>
+                <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="relative group rounded-xl overflow-hidden border border-slate-800">
+                        <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=600&q=80" alt="Long Range Airliner" class="h-36 w-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5">
+                            <span class="text-[11px] font-medium text-sky-300">Boeing 787-9 Dreamliner</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-slate-800">
+                        <img src="https://images.unsplash.com/photo-1570710891163-6d3b5c47248b?auto=format&fit=crop&w=600&q=80" alt="Airbus Aircraft" class="h-36 w-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5">
+                            <span class="text-[11px] font-medium text-sky-300">Airbus A350-900 XWB</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-slate-800">
+                        <img src="https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=600&q=80" alt="Flight Operations" class="h-36 w-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5">
+                            <span class="text-[11px] font-medium text-sky-300">International First Lounge</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-slate-800">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Boeing Flagship" class="h-36 w-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5">
+                            <span class="text-[11px] font-medium text-sky-300">Boeing 777-300ER Flagship</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Comprehensive Footer -->
+    <footer id="contact" class="bg-slate-950 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+            
+            <!-- Column 1: Company Profile -->
+            <div class="lg:col-span-2">
+                <div class="flex items-center space-x-2 mb-3">
+                    <div class="bg-sky-600 text-white font-bold h-7 w-7 rounded-lg flex items-center justify-center text-xs shadow-sm">
+                        <svg class="w-4 h-4 transform -rotate-45" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-base text-white tracking-tight">GLOBAL<span class="text-sky-500">SKY</span> AIRWAYS</span>
+                </div>
+                <p class="text-slate-400 text-xs leading-relaxed mb-4 max-w-sm font-normal">
+                    Connecting West Africa, Southern Africa, and North America with modern fleet technology, real-time ticket tracking, and dedicated passenger transit support.
+                </p>
+                
+                <div class="space-y-1.5 text-[11px] text-slate-400">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sky-400">🟢</span>
+                        <span><strong class="font-medium text-slate-300">Operational Status:</strong> Global Systems Normal</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sky-400">📍</span>
+                        <span><strong class="font-medium text-slate-300">Main Hubs:</strong> Accra (ACC) | Johannesburg (JNB) | Rochester (ROC)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div>
+                <h4 class="font-semibold text-xs uppercase tracking-wider text-white mb-3">Passenger Portal</h4>
+                <ul class="space-y-1.5 text-xs text-slate-400 font-normal">
+                    <li><a href="#home" class="hover:text-sky-400 transition">Flight Status Search</a></li>
+                    <li><a href="#services" class="hover:text-sky-400 transition">Baggage & RFID Tracking</a></li>
+                    <li><a href="#services" class="hover:text-sky-400 transition">Transit & Visa Guidance</a></li>
+                    <li><a href="#about" class="hover:text-sky-400 transition">Fleet Specifications</a></li>
+                    <li><a href="#fleet" class="hover:text-sky-400 transition">Interactive Flight Gallery</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Contact & Global Desks -->
+            <div>
+                <h4 class="font-semibold text-xs uppercase tracking-wider text-white mb-3">Global Help Desks</h4>
+                <ul class="space-y-2 text-xs text-slate-400 font-normal">
+                    <li>
+                        <strong class="text-slate-300 block text-[10px] uppercase font-medium">Ghana Terminal Desk:</strong>
+                        <span>Terminal 3, Kotoka Intl Airport, Accra</span>
+                    </li>
+                    <li>
+                        <strong class="text-slate-300 block text-[10px] uppercase font-medium">South Africa Transit Desk:</strong>
+                        <span>Terminal B, O.R. Tambo Intl Airport, Johannesburg</span>
+                    </li>
+                    <li>
+                        <strong class="text-slate-300 block text-[10px] uppercase font-medium">North America Arrival Desk:</strong>
+                        <span>Main Terminal, Greater Rochester Intl Airport (ROC)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Privacy & Cookie Preferences -->
+            <div>
+                <h4 class="font-semibold text-xs uppercase tracking-wider text-white mb-3">Privacy & Security</h4>
+                <p class="text-[11px] text-slate-400 mb-2 font-normal">We use essential cookies to enable secure flight status searches and verify session authenticity.</p>
+                <div class="flex flex-col gap-2">
+                    <button onclick="openCookieSettings()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium py-1.5 rounded-md text-xs transition">
+                        Cookie Settings 🍪
+                    </button>
+                </div>
+                <div class="mt-4 pt-2.5 border-t border-slate-800 text-[11px] text-slate-400 font-normal">
+                    <span>Direct Desk Email:</span><br>
+                    <a href="mailto:arthurevans500@gmail.com" class="text-sky-400 underline font-medium">arthurevans500@gmail.com</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-slate-900 text-center text-[11px] text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-3 font-normal">
+            <div>
+                &copy; 2026 GlobalSky Airways Aviation Group. All rights reserved.
+            </div>
+            <div class="flex space-x-4 text-slate-400">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition">Terms of Carriage</a>
+                <a href="#" class="hover:text-white transition">Transit Regulations</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================================= -->
+    <!-- COOKIE CONSENT BANNER POPUP -->
+    <!-- ========================================================================= -->
+    <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-50 bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-xl shadow-2xl border border-slate-700">
+        <div class="flex items-start space-x-3">
+            <span class="text-2xl">🍪</span>
+            <div class="flex-1">
+                <h4 class="font-semibold text-xs text-white">We value your privacy</h4>
+                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed font-normal">
+                    We use cookies to enhance your tracking experience, analyze live route metrics, and assist with support requests. 
+                </p>
+                <div class="mt-3 flex items-center gap-2">
+                    <button onclick="acceptCookies()" class="bg-sky-600 hover:bg-sky-500 text-white text-[11px] font-medium px-3.5 py-1.5 rounded-lg transition shadow">
+                        Accept All
+                    </button>
+                    <button onclick="declineCookies()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-medium px-3.5 py-1.5 rounded-lg border border-slate-700 transition">
+                        Decline
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- 10-SECOND LOADING OVERLAY -->
+    <!-- ========================================================================= -->
+    <div id="loading-overlay" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex flex-col items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl relative overflow-hidden">
+            <div class="relative w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full border-2 border-sky-500/20 animate-ping"></div>
+                <div class="absolute inset-1.5 rounded-full border border-sky-400/40 animate-spin border-t-sky-500"></div>
+                <div class="bg-sky-600/20 text-sky-400 h-9 w-9 rounded-xl flex items-center justify-center text-lg shadow-md border border-sky-400/20">
+                    ✈️
+                </div>
+            </div>
+
+            <h3 class="text-base font-semibold text-white mb-1">Connecting to Flight Radar...</h3>
+            <p id="loading-status-text" class="text-[11px] text-slate-400 mb-4 font-mono">Querying global satellite network...</p>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden p-0.5 border border-slate-700/50 mb-2">
+                <div id="loading-progress-bar" class="bg-gradient-to-r from-sky-500 to-indigo-500 h-full rounded-full w-0 transition-all duration-100 ease-linear"></div>
+            </div>
+
+            <div class="flex justify-between items-center text-[10px] text-slate-400 font-mono">
+                <span>Verification in progress</span>
+                <span id="loading-seconds" class="font-medium text-sky-400">10s</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- FULL-SCREEN BOARDING PASS & COMPREHENSIVE FLIGHT STATUS MODAL -->
+    <!-- ========================================================================= -->
+    <div id="full-screen-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden overflow-y-auto flex items-center justify-center p-0 sm:p-4">
+        
+        <div class="w-full h-full sm:h-auto sm:max-w-2xl sm:max-h-[90vh] sm:rounded-2xl bg-slate-900 text-white flex flex-col justify-between overflow-y-auto shadow-2xl border border-slate-800 relative">
+            
+            <!-- Modal Header -->
+            <div class="sticky top-0 z-20 bg-slate-900/95 backdrop-blur-md px-4 py-3 border-b border-slate-800 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-sky-600 text-white font-bold h-6 w-6 rounded-md flex items-center justify-center text-xs">✈</div>
+                    <span class="font-semibold text-xs tracking-wide text-white uppercase">Boarding Pass & Live Flight Status</span>
+                </div>
+                <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white h-7 w-7 rounded-full flex items-center justify-center text-xs font-bold transition">✕</button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-4 sm:p-6 space-y-4 flex-1 text-xs">
+                
+                <!-- Ticket Code & Status Header -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-800/60 p-3.5 rounded-xl border border-slate-700/50 gap-2">
+                    <div>
+                        <span class="text-[10px] font-normal text-slate-400 uppercase tracking-wider block">Ticket / PNR Reference</span>
+                        <h3 id="res-code" class="text-xl font-bold text-sky-400 tracking-wider">---</h3>
+                    </div>
+                    <div>
+                        <span id="res-status-badge" class="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                            ---
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Flight Route Overview Card -->
+                <div class="bg-slate-800/40 rounded-xl p-4 border border-slate-700/40">
+                    <div class="grid grid-cols-3 items-center text-center">
+                        <div class="text-left">
+                            <span id="res-dept-code" class="text-2xl font-bold text-white block">---</span>
+                            <span id="res-dept-city" class="text-[10px] text-slate-300 font-normal block mt-0.5">---</span>
+                            <span id="res-dept-time" class="text-[11px] text-sky-300 font-medium block mt-0.5">---</span>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center px-1">
+                            <span id="res-flight-num" class="text-[10px] font-semibold text-sky-400 uppercase tracking-wider mb-0.5">---</span>
+                            <div class="w-full flex items-center justify-center relative my-1">
+                                <div class="w-full h-0.5 bg-slate-700"></div>
+                                <span class="absolute bg-slate-800 px-1.5 text-sky-400 text-[10px]">✈</span>
+                            </div>
+                            <span id="res-duration" class="text-[9px] text-slate-400 font-normal">---</span>
+                        </div>
+
+                        <div class="text-right">
+                            <span id="res-arr-code" class="text-2xl font-bold text-white block">---</span>
+                            <span id="res-arr-city" class="text-[10px] text-slate-300 font-normal block mt-0.5">---</span>
+                            <span id="res-arr-time" class="text-[11px] text-sky-300 font-medium block mt-0.5">---</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primary Passenger Info Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    <div class="bg-slate-800/40 p-2.5 rounded-lg border border-slate-700/40">
+                        <span class="text-[10px] font-medium text-slate-400 uppercase block">Passenger</span>
+                        <p id="res-passenger" class="text-xs font-semibold text-white truncate mt-0.5">---</p>
+                    </div>
+                    <div class="bg-slate-800/40 p-2.5 rounded-lg border border-slate-700/40">
+                        <span class="text-[10px] font-medium text-slate-400 uppercase block">Seat / Class</span>
+                        <p id="res-seat" class="text-xs font-semibold text-sky-300 truncate mt-0.5">---</p>
+                    </div>
+                    <div class="bg-slate-800/40 p-2.5 rounded-lg border border-slate-700/40">
+                        <span class="text-[10px] font-medium text-slate-400 uppercase block">Terminal / Gate</span>
+                        <p id="res-gate" class="text-xs font-semibold text-slate-200 truncate mt-0.5">---</p>
+                    </div>
+                    <div class="bg-slate-800/40 p-2.5 rounded-lg border border-slate-700/40">
+                        <span class="text-[10px] font-medium text-slate-400 uppercase block">Flight Date</span>
+                        <p id="res-date" class="text-xs font-semibold text-white truncate mt-0.5">---</p>
+                    </div>
+                </div>
+
+                <!-- Secondary Technical Specifications Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    <div class="bg-slate-800/20 p-2 rounded-lg border border-slate-700/30">
+                        <span class="text-[9px] font-medium text-slate-400 uppercase block">Aircraft Model</span>
+                        <p id="res-aircraft" class="text-[11px] font-normal text-slate-300 truncate mt-0.5">---</p>
+                    </div>
+                    <div class="bg-slate-800/20 p-2 rounded-lg border border-slate-700/30">
+                        <span class="text-[9px] font-medium text-slate-400 uppercase block">Layover Time</span>
+                        <p id="res-layover" class="text-[11px] font-normal text-slate-300 truncate mt-0.5">---</p>
+                    </div>
+                    <div class="bg-slate-800/20 p-2 rounded-lg border border-slate-700/30">
+                        <span class="text-[9px] font-medium text-slate-400 uppercase block">Checked Baggage</span>
+                        <p id="res-baggage" class="text-[11px] font-normal text-slate-300 truncate mt-0.5">---</p>
+                    </div>
+                    <div class="bg-slate-800/20 p-2 rounded-lg border border-slate-700/30">
+                        <span class="text-[9px] font-medium text-slate-400 uppercase block">Transit Visa Req.</span>
+                        <p id="res-visa" class="text-[11px] font-normal text-slate-300 truncate mt-0.5">---</p>
+                    </div>
+                </div>
+
+                <!-- Segment Route Breakdown -->
+                <div id="res-segments-container" class="hidden bg-slate-800/30 p-3 rounded-xl border border-slate-700/40 space-y-2">
+                    <h4 class="text-[10px] font-semibold uppercase tracking-wider text-sky-400">Flight Route & Transit Breakdown</h4>
+                    <div id="res-segments-list" class="space-y-1.5 text-[11px] text-slate-300 font-normal">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Flight Completion Progress Bar -->
+                <div class="bg-slate-800/30 p-3 rounded-xl border border-slate-700/40 space-y-1.5">
+                    <div class="flex justify-between items-center text-[10px]">
+                        <span class="font-medium text-slate-300 uppercase tracking-wide">Flight Completion Progress</span>
+                        <span id="progress-percentage" class="font-semibold text-sky-400">10%</span>
+                    </div>
+                    <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden p-0.5">
+                        <div id="progress-bar-fill" class="bg-sky-500 h-full rounded-full transition-all duration-700 ease-out" style="width: 10%;"></div>
+                    </div>
+                    <p id="res-current-location" class="text-[10px] text-slate-400 text-center pt-0.5 font-normal">Location Status: ---</p>
+                </div>
+
+                <!-- Flight Milestone Timeline -->
+                <div id="timeline-container" class="space-y-4 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-slate-700 pt-1">
+                    <div class="flex items-start space-x-3 relative">
+                        <div id="step1-icon" class="h-6 w-6 rounded-full bg-sky-500 text-white flex items-center justify-center font-medium text-[10px] z-10 shadow">1</div>
+                        <div>
+                            <h5 id="step1-title" class="font-medium text-white text-xs">Boarding at Kotoka International Airport (ACC)</h5>
+                            <p id="step1-desc" class="text-[10px] text-slate-400 font-normal">Client has 15 minutes to board flight from Accra to Rochester via South Africa.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-3 relative">
+                        <div id="step2-icon" class="h-6 w-6 rounded-full bg-slate-700 text-slate-400 flex items-center justify-center font-medium text-[10px] z-10 shadow">2</div>
+                        <div>
+                            <h5 id="step2-title" class="font-medium text-white text-xs">South Africa Transit Hub</h5>
+                            <p id="step2-desc" class="text-[10px] text-slate-400 font-normal">---</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3 relative">
+                        <div id="step3-icon" class="h-6 w-6 rounded-full bg-slate-700 text-slate-400 flex items-center justify-center font-medium text-[10px] z-10 shadow">3</div>
+                        <div>
+                            <h5 id="step3-title" class="font-medium text-white text-xs">Final Arrival (Rochester, NY - ROC)</h5>
+                            <p id="step3-desc" class="text-[10px] text-slate-400 font-normal">---</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer Actions -->
+            <div class="sticky bottom-0 z-20 bg-slate-900/95 backdrop-blur-md p-3 border-t border-slate-800 flex flex-col sm:flex-row gap-2 justify-end text-xs">
+                <button onclick="openHelpCenterModal()" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium px-4 py-2 rounded-lg transition border border-slate-700">
+                    Contact Support Desk 💬
+                </button>
+                <button onclick="closeModal()" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-500 text-white font-medium px-6 py-2 rounded-lg transition shadow">
+                    Close Boarding Pass
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- HELP CENTER CONTACT MODAL FORM -->
+    <!-- ========================================================================= -->
+    <div id="help-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white text-slate-900 rounded-2xl max-w-md w-full p-6 relative shadow-2xl border border-slate-100 text-xs">
+            <button onclick="closeHelpCenterModal()" class="absolute top-4 right-4 bg-slate-100 text-slate-600 hover:bg-slate-200 h-7 w-7 rounded-full flex items-center justify-center font-bold">✕</button>
+            
+            <h3 class="text-lg font-bold text-slate-900 mb-1">GlobalSky Support Desk</h3>
+            <p class="text-slate-500 mb-4 font-normal">Enter your details and inquiry message below to send a direct request to our customer support desk for transit or flight assistance.</p>
+            
+            <!-- Updated Form Action to send directly to arthurevans500@gmail.com -->
+            <form action="https://formspree.io/f/arthurevans500@gmail.com" method="POST" class="space-y-3">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase text-slate-600 mb-1">Ticket / PNR Reference</label>
+                    <input type="text" id="help-pnr" name="ticket_pnr" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-sky-600 focus:outline-none uppercase font-semibold" placeholder="GS-99305">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase text-slate-600 mb-1">Full Name</label>
+                    <input type="text" name="passenger_name" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-sky-600 focus:outline-none font-normal" placeholder="Enter your full name">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase text-slate-600 mb-1">Your Email Address</label>
+                    <input type="email" name="passenger_email" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-sky-600 focus:outline-none font-normal" placeholder="arthurevans500@gmail.com">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase text-slate-600 mb-1">Inquiry / Transit Message</label>
+                    <textarea name="message" rows="3" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-sky-600 focus:outline-none font-normal" placeholder="Describe your transit assistance request..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-medium py-2.5 rounded-lg text-xs transition shadow mt-1">
+                    Send Inquiry to Support Desk
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Interactive JavaScript Engine -->
+    <script>
+        // Updated Flight Database with Four Tracking Codes
+        const flightsData = {
+            "GS-77401": {
+                flightNo: "UA 1059",
+                status: "Boarding Soon ⏳",
+                statusType: "warning",
+                passenger: "Erica Collins",
+                seat: "54 (Economy)",
+                gate: "Gate A6 (Terminal 1, ACC)",
+                date: "Sept 26, 2026",
+                deptCode: "ACC",
+                deptCity: "Kotoka Intl, Accra (ACC)",
+                deptTime: "09:30 AM",
+                arrCode: "ROC",
+                arrCity: "Rochester, NY (ROC)",
+                arrTime: "12:12 AM",
+                duration: "14h 43m (Total)",
+                aircraft: "Boeing 787-9 Dreamliner",
+                layover: "2h 30m Transit in South Africa (JNB)",
+                baggage: "1 x 32kg (Checked Through)",
+                visa: "Transit Clearance Verified",
+                progress: 10,
+                location: "Kotoka International Airport (ACC) — 15 Minutes Remaining to Board Flight to Rochester via South Africa",
+                segments: [
+                    "<strong>Leg 1 (Boarding in 15 mins):</strong> Kotoka International Airport, Accra (ACC) ✈️ South Africa Airport (JNB) — Flight GS-1059",
+                    "<strong>Transit Stopover:</strong> Alight at South Africa Airport (JNB) for layover & connecting flight clearance",
+                    "<strong>Leg 2 (Scheduled):</strong> South Africa Airport (JNB) ✈️ Greater Rochester International Airport (ROC) — Flight GS-502"
+                ],
+                milestones: {
+                    s1Icon: "⏳",
+                    s1Class: "bg-amber-500 text-white animate-pulse",
+                    s1Title: "Boarding at Kotoka International Airport (ACC)",
+                    s1Desc: "Client has 15 minutes to board flight from Accra to Rochester via South Africa.",
+                    s2Icon: "2",
+                    s2Class: "bg-slate-700 text-slate-400",
+                    s2Title: "South Africa Transit Hub (Layover)",
+                    s2Desc: "Alight at South Africa Airport to transfer onto connecting flight GS-502.",
+                    s3Icon: "3",
+                    s3Class: "bg-slate-700 text-slate-400",
+                    s3Title: "Final Destination: Rochester (ROC)",
+                    s3Desc: "Scheduled arrival at Greater Rochester International Airport."
+                }
+            },
+            "GS-88204": {
+                flightNo: "UA 1059",
+                status: "In Transit 🛂",
+                statusType: "warning",
+                passenger: "Erica Collins",
+                seat: "54 (Economy)",
+                gate: "Gate B12 (Terminal B, JNB)",
+                date: "Sept 26, 2026",
+                deptCode: "ACC",
+                deptCity: "Kotoka Intl, Accra (ACC)",
+                deptTime: "09:30 AM",
+                arrCode: "ROC",
+                arrCity: "Rochester, NY (ROC)",
+                arrTime: "12:12 AM",
+                duration: "14h 43m (Total)",
+                aircraft: "Airbus A350-900 XWB",
+                layover: "3h 45m Transit in South Africa (JNB)",
+                baggage: "1 x 32kg (Checked Through)",
+                visa: "Immigration Clearance Active",
+                progress: 40,
+                location: "O.R. Tambo International Airport, South Africa (JNB) — Client Has Reached Airport & Going Through Immigration Checks to Board Next Flight to Rochester (ROC)",
+                segments: [
+                    "<strong>Leg 1 (Completed):</strong> Kotoka Intl, Accra (ACC) ✈️ O.R. Tambo Intl, South Africa (JNB) — Arrived",
+                    "<strong>Transit Status (ACTIVE):</strong> Client reached South Africa Airport (JNB) — currently processing immigration & transit checks at Terminal B",
+                    "<strong>Leg 2 (Boarding Next):</strong> O.R. Tambo Intl, South Africa (JNB) ✈️ Greater Rochester Intl Airport (ROC) — Flight GS-610"
+                ],
+                milestones: {
+                    s1Icon: "✓",
+                    s1Class: "bg-emerald-500 text-white",
+                    s1Title: "Leg 1 Completed (ACC to JNB)",
+                    s1Desc: "Flight arrived safely at O.R. Tambo International Airport, South Africa.",
+                    s2Icon: "🛂",
+                    s2Class: "bg-amber-500 text-white animate-pulse",
+                    s2Title: "Immigration & Transit Checks Active",
+                    s2Desc: "Client has reached South Africa Airport and is going through immigration checks to board next flight to Rochester.",
+                    s3Icon: "3",
+                    s3Class: "bg-slate-700 text-slate-400",
+                    s3Title: "Final Leg: Rochester (ROC)",
+                    s3Desc: "Connecting flight GS-610 to Greater Rochester International Airport."
+                }
+            },
+            "GS-99305": {
+                flightNo: "UA 1059",
+                status: "Flight Cancelled ❌",
+                statusType: "error",
+                passenger: "Erica Collins",
+                seat: "54 (Economy)",
+                gate: "Terminal B (Hold Zone, JNB)",
+                date: "Sept 26, 2026",
+                deptCode: "ACC",
+                deptCity: "Kotoka Intl, Accra (ACC)",
+                deptTime: "09:30 AM",
+                arrCode: "ROC",
+                arrCity: "Rochester, NY (ROC)",
+                arrTime: "Cancelled",
+                duration: "Grounded at JNB",
+                aircraft: "Airbus A350-900 XWB",
+                layover: "Transit Suspended",
+                baggage: "Held at JNB Terminal B Customs",
+                visa: "Violation Notice Issued",
+                progress: 50,
+                location: "<span class='text-red-400 font-bold'>FLIGHT CANCELLED AT SOUTH AFRICA AIRPORT DUE TO VIOLATION OF RULES. CONTACT HELP CENTER FOR MORE INFORMATION.</span>",
+                segments: [
+                    "<strong>Leg 1 (Completed):</strong> Kotoka Intl, Accra (ACC) ✈️ O.R. Tambo Intl, South Africa (JNB) — Arrived",
+                    "<strong class='text-red-400'>Transit Status (CANCELLED):</strong> Flight cancelled at South Africa Airport due to violation of rules.",
+                    "<strong class='text-red-400'>Leg 2 (Grounded):</strong> South Africa Airport (JNB) ✈️ Greater Rochester Intl Airport (ROC) — SUSPENDED. Please contact Help Center for more information."
+                ],
+                milestones: {
+                    s1Icon: "✓",
+                    s1Class: "bg-emerald-500 text-white",
+                    s1Title: "Leg 1 Completed (ACC to JNB)",
+                    s1Desc: "Flight arrived at O.R. Tambo International Airport, South Africa.",
+                    s2Icon: "❌",
+                    s2Class: "bg-red-600 text-white animate-bounce",
+                    s2Title: "Flight Cancelled at South Africa Airport",
+                    s2Desc: "Flight cancelled at South Africa Airport due to violation of rules. Contact help center for more information.",
+                    s3Icon: "🚫",
+                    s3Class: "bg-slate-800 text-slate-600 border border-slate-700",
+                    s3Title: "Leg 2 Suspended (JNB to ROC)",
+                    s3Desc: "Connecting flight to Greater Rochester International Airport suspended due to transit rule violation."
+                }
+            },
+            "GS-2026-SA": {
+                flightNo: "UA 1059",
+                status: "En Route to SA ✈️",
+                statusType: "warning",
+                passenger: "Erica Collins",
+                seat: "54 (Economy)",
+                gate: "Gate A6 (Terminal 1, ACC)",
+                date: "Sept 26, 2026",
+                deptCode: "ACC",
+                deptCity: "Kotoka Intl, Accra (ACC)",
+                deptTime: "09:30 AM",
+                arrCode: "JNB",
+                arrCity: "O.R. Tambo Intl, South Africa (JNB)",
+                arrTime: "02:45PM",
+                duration: "5h 45m (Leg 1)",
+                aircraft: "Boeing 777-300ER Flagship",
+                layover: "2h 30m Upcoming Transit in South Africa",
+                baggage: "1 x 32kg (Priority Tagged)",
+                visa: "South Africa Entry Cleared",
+                progress: 20,
+                location: "In Flight Over Atlantic Corridor — Flight is currently 20% complete on its direct leg heading toward South Africa Airport (JNB).",
+                segments: [
+                    "<strong>Leg 1 (Active - 20% Complete):</strong> Kotoka International Airport, Accra (ACC) ✈️ South Africa Airport (JNB) — Flight UA 1065",
+                    "<strong>Upcoming Transit:</strong> Scheduled layover at O.R. Tambo International Airport, South Africa (JNB)",
+                    "<strong>Leg 2 (Pending):</strong> South Africa Airport (JNB) ✈️ Greater Rochester International Airport (ROC)"
+                ],
+                milestones: {
+                    s1Icon: "✓",
+                    s1Class: "bg-emerald-500 text-white",
+                    s1Title: "Departed Kotoka International Airport (ACC)",
+                    s1Desc: "Flight took off successfully on schedule heading to South Africa.",
+                    s2Icon: "✈️",
+                    s2Class: "bg-sky-500 text-white animate-pulse",
+                    s2Title: "In Flight to South Africa Airport (20% Progress)",
+                    s2Desc: "Aircraft is cruising smoothly toward O.R. Tambo International Airport, South Africa.",
+                    s3Icon: "3",
+                    s3Class: "bg-slate-700 text-slate-400",
+                    s3Title: "Final Destination: Rochester (ROC)",
+                    s3Desc: "Connecting leg to Greater Rochester International Airport pending arrival at JNB."
+                }
+            }
+        };
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hero Image Rotator
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function rotateHeroImages() {
+            slides[currentSlide].classList.remove('opacity-100');
+            slides[currentSlide].classList.add('opacity-0');
+            
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            slides[currentSlide].classList.remove('opacity-0');
+            slides[currentSlide].classList.add('opacity-100');
+        }
+
+        setInterval(rotateHeroImages, 4000);
+
+        // Tracking Form Submission
+        function handleHeroTrack(e) {
+            e.preventDefault();
+            const code = document.getElementById('hero-tracking-input').value.trim().toUpperCase();
+            executeTracking(code);
+        }
+
+        // Execute Flight Tracking Query with Delay
+        function executeTracking(code) {
+            const errorEl = document.getElementById('hero-error');
+
+            if (!code) {
+                errorEl.innerText = "Please enter your tracking code or PNR.";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            const data = flightsData[code];
+
+            if (!data) {
+                errorEl.innerText = `No flight record found for code: "${code}". Try "GS-2026-SA", "GS-88204", "GS-99305", or "GS-77401".`;
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            errorEl.classList.add('hidden');
+
+            const overlay = document.getElementById('loading-overlay');
+            const bar = document.getElementById('loading-progress-bar');
+            const secondsText = document.getElementById('loading-seconds');
+            const statusText = document.getElementById('loading-status-text');
+            const trackBtn = document.getElementById('track-btn');
+
+            trackBtn.disabled = true;
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            let secondsLeft = 10;
+            let progress = 0;
+
+            const loadingMessages = [
+                "Querying global satellite network...",
+                "Connecting to South Africa transponder data...",
+                "Calculating transit clearance status...",
+                "Verifying passenger flight itinerary...",
+                "Finalizing live radar metrics..."
+            ];
+
+            bar.style.width = '0%';
+            secondsText.innerText = '10s';
+
+            const interval = setInterval(() => {
+                progress += 1;
+                bar.style.width = `${progress}%`;
+
+                if (progress % 10 === 0) {
+                    secondsLeft -= 1;
+                    secondsText.innerText = `${Math.max(0, secondsLeft)}s`;
+                }
+
+                if (progress % 20 === 0) {
+                    const msgIndex = Math.min(Math.floor(progress / 20), loadingMessages.length - 1);
+                    statusText.innerText = loadingMessages[msgIndex];
+                }
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    overlay.classList.add('hidden');
+                    trackBtn.disabled = false;
+                    openModal(code, data);
+                }
+            }, 100);
+        }
+
+        // Open Modal
+        function openModal(code, data) {
+            document.getElementById('res-code').innerText = code;
+            document.getElementById('res-flight-num').innerText = data.flightNo;
+            document.getElementById('res-passenger').innerText = data.passenger;
+            document.getElementById('res-seat').innerText = data.seat;
+            document.getElementById('res-gate').innerText = data.gate;
+            document.getElementById('res-date').innerText = data.date;
+
+            document.getElementById('res-aircraft').innerText = data.aircraft || "Commercial Airliner";
+            document.getElementById('res-layover').innerText = data.layover || "Non-Stop";
+            document.getElementById('res-baggage').innerText = data.baggage || "Standard Checked Bag";
+            document.getElementById('res-visa').innerText = data.visa || "Standard Boarding";
+
+            document.getElementById('res-dept-code').innerText = data.deptCode;
+            document.getElementById('res-dept-city').innerText = data.deptCity;
+            document.getElementById('res-dept-time').innerText = data.deptTime;
+
+            document.getElementById('res-arr-code').innerText = data.arrCode;
+            document.getElementById('res-arr-city').innerText = data.arrCity;
+            document.getElementById('res-arr-time').innerText = data.arrTime;
+            document.getElementById('res-duration').innerText = data.duration;
+
+            document.getElementById('res-current-location').innerHTML = "Location Status: " + data.location;
+            
+            // Route Segments
+            const segContainer = document.getElementById('res-segments-container');
+            const segList = document.getElementById('res-segments-list');
+            if (data.segments && data.segments.length > 0) {
+                segList.innerHTML = data.segments.map(seg => `<div class="p-2 bg-slate-900/60 rounded-lg border border-slate-800">${seg}</div>`).join('');
+                segContainer.classList.remove('hidden');
+            } else {
+                segContainer.classList.add('hidden');
+            }
+
+            // Flight Progress
+            document.getElementById('progress-percentage').innerText = data.progress + "%";
+            document.getElementById('progress-bar-fill').style.width = data.progress + "%";
+
+            // Status Badge Formatting
+            const badge = document.getElementById('res-status-badge');
+            badge.innerText = data.status;
+
+            const progressBarFill = document.getElementById('progress-bar-fill');
+
+            if (data.statusType === 'error') {
+                badge.className = "px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/30";
+                progressBarFill.className = "bg-red-500 h-full rounded-full transition-all duration-700 ease-out";
+            } else if (data.statusType === 'warning') {
+                badge.className = "px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/30";
+                progressBarFill.className = "bg-amber-500 h-full rounded-full transition-all duration-700 ease-out";
+            } else {
+                badge.className = "px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                progressBarFill.className = "bg-sky-500 h-full rounded-full transition-all duration-700 ease-out";
+            }
+
+            // Milestone Timeline Updates
+            const m = data.milestones;
+            
+            const step1Icon = document.getElementById('step1-icon');
+            step1Icon.innerText = m.s1Icon || "1";
+            step1Icon.className = `h-6 w-6 rounded-full flex items-center justify-center font-medium text-[10px] z-10 shadow ${m.s1Class || 'bg-slate-700 text-slate-400'}`;
+            document.getElementById('step1-title').innerText = m.s1Title;
+            document.getElementById('step1-desc').innerText = m.s1Desc;
+
+            const step2Icon = document.getElementById('step2-icon');
+            step2Icon.innerText = m.s2Icon || "2";
+            step2Icon.className = `h-6 w-6 rounded-full flex items-center justify-center font-medium text-[10px] z-10 shadow ${m.s2Class || 'bg-slate-700 text-slate-400'}`;
+            document.getElementById('step2-title').innerText = m.s2Title;
+            document.getElementById('step2-desc').innerText = m.s2Desc;
+
+            const step3Icon = document.getElementById('step3-icon');
+            step3Icon.innerText = m.s3Icon || "3";
+            step3Icon.className = `h-6 w-6 rounded-full flex items-center justify-center font-medium text-[10px] z-10 shadow ${m.s3Class || 'bg-slate-700 text-slate-400'}`;
+            document.getElementById('step3-title').innerText = m.s3Title;
+            document.getElementById('step3-desc').innerText = m.s3Desc;
+
+            const modal = document.getElementById('full-screen-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close Boarding Pass Modal
+        function closeModal() {
+            const modal = document.getElementById('full-screen-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Help Center Modal
+        function openHelpCenterModal() {
+            const pnrCode = document.getElementById('res-code').innerText;
+            if (pnrCode && pnrCode !== '---') {
+                document.getElementById('help-pnr').value = pnrCode;
+            }
+            document.getElementById('help-modal').classList.remove('hidden');
+        }
+
+        function closeHelpCenterModal() {
+            document.getElementById('help-modal').classList.add('hidden');
+        }
+
+        // Cookie Consent Popup Handlers
+        function acceptCookies() {
+            document.getElementById('cookie-banner').classList.add('hidden');
+            localStorage.setItem('cookieConsent', 'accepted');
+        }
+
+        function declineCookies() {
+            document.getElementById('cookie-banner').classList.add('hidden');
+            localStorage.setItem('cookieConsent', 'declined');
+        }
+
+        function openCookieSettings() {
+            document.getElementById('cookie-banner').classList.remove('hidden');
+        }
+
+        // Check Cookie Consent Status on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookie-banner').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
